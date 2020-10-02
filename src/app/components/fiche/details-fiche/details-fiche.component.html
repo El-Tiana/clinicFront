@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="card shadow bg-light">
+        <div class="card-title text-center">
+            <div class="col m-2">
+                <h1>Fiche malade</h1>
+                <a href="#" routerLink="/fichesuser" class="btn btn-primary">Retour</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="details-fiche border col m-2 p-2">
+                <div class="col">
+                    <strong>Nom du patient:</strong>
+                    <p>{{ fiche.patient.username }}</p>
+                </div>
+                <div class="col">
+                    <strong>Symptomes:</strong>
+                    <ul *ngFor="let symptome of fiche.symptomes">
+                        <li>{{ fiche.symptome.description }}</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <strong>Médecin en charge:</strong>
+                    <p *ngIf="isCharge">{{ fiche.medecin.name }}</p>
+                    <p *ngIf="!isCharge">fiche encore en attente</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <button *ngIf="isPatient" type="button" (click)="deleteFiche(fiche.id)" class="btn btn-danger mx-1">Supprimer</button>
+            <button *ngIf="isDoctor" type="button" (click)="prendreCharge(fiche.id)" class="btn btn-dark mx-1">Prendre en charge</button>
+        </div>
+    </div>
+</div>

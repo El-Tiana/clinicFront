@@ -1,0 +1,14 @@
+<div>
+    <h1>Modifier symptome</h1>
+    <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+        <div class="form-group">
+            <label for="body">Description</label>
+            <textarea formControlName="description" id="body" type="text" [(ngModel)]="symptome.description" class="form-control">
+            </textarea>
+            <div *ngIf="f.description.touched && f.description.invalid" class="alert alert-danger">
+                <div *ngIf="f.description.errors.required">Veuillez entrer une valeur</div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Modifier</button>
+    </form>
+</div>

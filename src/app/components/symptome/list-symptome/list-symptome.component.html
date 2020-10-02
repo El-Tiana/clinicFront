@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>Liste des symptomes</h1>
+    <a href="#" routerLink="/symptomes/addsymptome" class="btn btn-success">Ajouter un symptome</a>
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th width="220px">Action</th>
+        </tr>
+        <tr *ngFor="let symptome of symptomes">
+            <td>{{ symptome.id }}</td>
+            <td>{{ symptome.description }}</td>
+            <td>
+                <a href="#" [routerLink]="['/symptomes/', symptome.id]" class="btn btn-info">Voir</a>
+                <a href="#" [routerLink]="['/symptomes/updatesymptome', symptome.id]" class="btn btn-primary">Modifier</a>
+                <button type="button" (click)="deleteSymptome(symptome.id)" class="btn btn-danger">Supprimer</button>
+            </td>
+        </tr>
+    </table>
+</div>

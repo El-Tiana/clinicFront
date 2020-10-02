@@ -1,0 +1,39 @@
+<div class="card shadow bg-light">
+    <div class="card-body">
+        <h1 class="card-title text-center">Ajouter Maladie</h1>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <div class="form-group">
+                <label>Nom</label>
+                <input class="form-control" formControlName="name" type="text">
+            </div>
+            <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+                <div *ngIf="f.name.errors.required">Veuillez entrer une valeur.</div>
+            </div>
+            <div class="form-group">
+                <ng-select [items]="listesymptomes" bindLabel="description" placeholder="Selectionnez les symptomes" appendTo="body" multiple="true" formControlName="symptomes">
+                </ng-select>
+            </div>
+            <form [formGroup]="formSymptome" (ngSubmit)="submitSymptome()" class="">
+                <div class="form-inline align-items-center">
+                    <label class="col-form-label col-form-label-sm mx-2">Autre symptome:</label>
+                    <input class="form-control form-control-sm mb-2 mr-sm-2" formControlName="description" type="text">
+                    <button class="btn btn-primary mb-2 mr-sm-2" type="submit" [disabled]="!formSymptome.valid">Ajouter symptome</button>
+                </div>
+            </form>
+            <div class="form-group">
+                <ng-select [items]="listemedicaments" bindLabel="name" placeholder="Selectionnez les remedes pour cette maladie" appendTo="body" multiple="true" formControlName="cures">
+                </ng-select>
+            </div>
+            <form [formGroup]="formMedicament" (ngSubmit)="submitMedicament()">
+                <div class="form-inline align-items-center">
+                    <label class="col-form-label col-form-label-sm mx-2">Ajouter un médicament:</label>
+                    <input class="form-control form-control-sm mb-2 mr-sm-2" formControlName="name" type="text">
+                    <button class="btn btn-primary mb-2 mr-sm-2" type="submit" [disabled]="!formMedicament.valid">Ajouter</button>
+                </div>
+            </form>
+            <div class="text-center py-4 mt-3">
+                <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>

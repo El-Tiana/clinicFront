@@ -1,0 +1,36 @@
+<div *ngIf="isLoggedIn" class="container">
+    <div class="col p-1 my-2">
+        <h1>Liste des fiches</h1>
+        <div *ngIf="isPatient">
+            <a href="#" routerLink="/fiches/addfiche" class="btn btn-success mr-2">Créer une fiche</a>
+            <button type="button" (click)="showAll(1)" class="btn btn-light">Toutes les fiches</button>
+            <button type="button" (click)="showAttente(1)" class="btn btn-light">Fiches en attente</button>
+            <button type="button" (click)="showGere(1)" class="btn btn-light">Fiches en cours</button>
+            <button type="button" (click)="showFini(1)" class="btn btn-light">Fiches closes</button>
+        </div>
+        <div *ngIf="isDoctor">
+            <button type="button" (click)="showAll(2)" class="btn btn-light">Toutes les fiches</button>
+            <button type="button" (click)="showAttente(2)" class="btn btn-light">Fiches en attente</button>
+            <button type="button" (click)="showGere(2)" class="btn btn-light">Fiches en cours</button>
+            <button type="button" (click)="showFini(2)" class="btn btn-light">Fiches closes</button>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <tr>
+            <th>Date</th>
+            <th>Etat</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let fiche of fiches">
+            <td>{{ fiche.dateFiche | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ listeetat[fiche.etat] }}</td>
+            <td>
+                <a href="#" [routerLink]="['/fiches/', fiche.id]" class="btn btn-info mx-1">Voir</a>
+                <button *ngIf="isPatient" type="button" (click)="deleteFiche(fiche.id)" class="btn btn-danger mx-1">Supprimer</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="!isLoggedIn">
+    <h1>Page non autorisée!</h1>
+</div>

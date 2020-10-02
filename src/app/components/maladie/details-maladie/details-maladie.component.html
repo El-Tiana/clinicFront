@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col m-2">
+            <h1>Details maladie</h1>
+            <a href="#" routerLink="/maladies" class="btn btn-primary">Retour</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="details-maladie border col m-2 p-2">
+            <div class="col">
+                <strong>Nom:</strong>
+                <p>{{ maladie.name }}</p>
+            </div>
+            <div class="col">
+                <strong>Symptomes:</strong>
+                <ul *ngFor="let symptome of maladie.symptomes">
+                    <li>{{ symptome.description }}</li>
+                </ul>
+            </div>
+            <div class="col">
+                <strong>Medicaments:</strong>
+                <ul *ngFor="let medicament of maladie.cures">
+                    <li>{{ medicament.name }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
