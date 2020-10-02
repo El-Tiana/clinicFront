@@ -61,10 +61,22 @@ export class ListFicheUserComponent implements OnInit {
       console.log(this.fiches);
     })
   }
+  getFichesByEtat(etat:number){
+    this.ficheService.getByEtat(etat).subscribe((data: Fiche[])=>{
+      this.fiches = data;
+      console.log(this.fiches);
+    })
+  }
   getFichesByIdPatient(){
-    this.fetchFiche();
     console.log(this.patient);
     this.ficheService.getByUserId(this.user.id).subscribe((data: Fiche[])=>{
+      this.fiches = data;
+      console.log(this.fiches);
+    })
+  }
+  getFichesByIdPatientAndEtat(etat:number){
+    console.log(this.patient);
+    this.ficheService.getByUserIdAndEtat(this.user.id,etat).subscribe((data: Fiche[])=>{
       this.fiches = data;
       console.log(this.fiches);
     })
@@ -75,10 +87,50 @@ export class ListFicheUserComponent implements OnInit {
       console.log(this.fiches);
     })
   }
+  getFichesByIdDoctorAndEtat(etat:number){
+    console.log(this.patient);
+    this.ficheService.getByDoctorIdAndEtat(this.user.id,etat).subscribe((data: Fiche[])=>{
+      this.fiches = data;
+      console.log(this.fiches);
+    })
+  }
   prendreEnCharge(){
 
   }
   showAll(mode:number){
-    
+    if(mode===1){
+      console.log("patient");
+      this.getFichesByIdPatient();
+    }else if(mode===2){
+      console.log("doctor");
+      this.getFichesByIdDoctor();
+    }
+  }
+  showAttente(mode:number){
+    if(mode===1){
+      console.log("patient");
+      this.getFichesByIdPatientAndEtat(0);
+    }else if(mode===2){
+      console.log("doctor");
+      this.getFichesByEtat(0);
+    }
+  }
+  showGere(mode:number){
+    if(mode===1){
+      console.log("patient");
+      this.getFichesByIdPatientAndEtat(1);
+    }else if(mode===2){
+      console.log("doctor");
+      this.getFichesByIdDoctorAndEtat(1);
+    }
+  }
+  showFini(mode:number){
+    if(mode===1){
+      console.log("patient");
+      this.getFichesByIdPatientAndEtat(2);
+    }else if(mode===2){
+      console.log("doctor");
+      this.getFichesByIdDoctorAndEtat(2);
+    }
   }
 }

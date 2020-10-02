@@ -16,10 +16,19 @@ export class FicheService {
     return this.http.get<Fiche[]>(baseUrl).pipe(catchError(this.errorHandler));
   }
   getByUserId(patient): Observable<Fiche[]> {
-    return this.http.post<Fiche[]>(`${baseUrl}/user`,patient).pipe(catchError(this.errorHandler));
+    return this.http.post<Fiche[]>(baseUrl,patient).pipe(catchError(this.errorHandler));
   }
-  getByDoctorId(id): Observable<Fiche[]> {
-    return this.http.get<Fiche[]>(`${baseUrl}/doctor/${id}`).pipe(catchError(this.errorHandler));
+  getByUserIdAndEtat(patient,etat): Observable<Fiche[]> {
+    return this.http.post<Fiche[]>(`${baseUrl}/user/etat`,[patient,etat]).pipe(catchError(this.errorHandler));
+  }
+  getByDoctorId(doctor): Observable<Fiche[]> {
+    return this.http.post<Fiche[]>(`${baseUrl}/doctor`,doctor).pipe(catchError(this.errorHandler));
+  }
+  getByEtat(etat): Observable<Fiche[]> {
+    return this.http.post<Fiche[]>(`${baseUrl}/etat`,etat).pipe(catchError(this.errorHandler));
+  }
+  getByDoctorIdAndEtat(doctor,etat): Observable<Fiche[]> {
+    return this.http.post<Fiche[]>(`${baseUrl}/doctor/etat`,[doctor,etat]).pipe(catchError(this.errorHandler));
   }
 
   get(id): Observable<Fiche> {
