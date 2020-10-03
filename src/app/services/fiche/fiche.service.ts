@@ -36,7 +36,7 @@ export class FicheService {
   }
 
   create(data): Observable<Fiche> {
-    return this.http.post<Fiche>(baseUrl, data).pipe(catchError(this.errorHandler));
+    return this.http.post<Fiche>(`${baseUrl}/create`, data).pipe(catchError(this.errorHandler));
   }
 
   update(id, data): Observable<Fiche> {

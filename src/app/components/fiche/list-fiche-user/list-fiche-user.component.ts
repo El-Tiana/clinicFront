@@ -74,7 +74,7 @@ export class ListFicheUserComponent implements OnInit {
       console.log(this.fiches);
     })
   }
-  getFichesByIdPatientAndEtat(etat:number){
+  getFichesByIdPatientAndEtat(etat){
     console.log(this.patient);
     this.ficheService.getByUserIdAndEtat(this.user.id,etat).subscribe((data: Fiche[])=>{
       this.fiches = data;
@@ -87,17 +87,14 @@ export class ListFicheUserComponent implements OnInit {
       console.log(this.fiches);
     })
   }
-  getFichesByIdDoctorAndEtat(etat:number){
+  getFichesByIdDoctorAndEtat(etat){
     console.log(this.patient);
     this.ficheService.getByDoctorIdAndEtat(this.user.id,etat).subscribe((data: Fiche[])=>{
       this.fiches = data;
       console.log(this.fiches);
     })
   }
-  prendreEnCharge(){
-
-  }
-  showAll(mode:number){
+  showAll(mode){
     if(mode===1){
       console.log("patient");
       this.getFichesByIdPatient();
@@ -106,7 +103,7 @@ export class ListFicheUserComponent implements OnInit {
       this.getFichesByIdDoctor();
     }
   }
-  showAttente(mode:number){
+  showAttente(mode){
     if(mode===1){
       console.log("patient");
       this.getFichesByIdPatientAndEtat(0);
@@ -115,7 +112,7 @@ export class ListFicheUserComponent implements OnInit {
       this.getFichesByEtat(0);
     }
   }
-  showGere(mode:number){
+  showGere(mode){
     if(mode===1){
       console.log("patient");
       this.getFichesByIdPatientAndEtat(1);
@@ -124,7 +121,7 @@ export class ListFicheUserComponent implements OnInit {
       this.getFichesByIdDoctorAndEtat(1);
     }
   }
-  showFini(mode:number){
+  showFini(mode){
     if(mode===1){
       console.log("patient");
       this.getFichesByIdPatientAndEtat(2);

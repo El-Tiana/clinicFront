@@ -15,19 +15,19 @@
                 <div class="col">
                     <strong>Symptomes:</strong>
                     <ul *ngFor="let symptome of fiche.symptomes">
-                        <li>{{ fiche.symptome.description }}</li>
+                        <li>{{ symptome.description }}</li>
                     </ul>
                 </div>
                 <div class="col">
                     <strong>Médecin en charge:</strong>
-                    <p *ngIf="isCharge">{{ fiche.medecin.name }}</p>
+                    <p *ngIf="fiche.etat!==0">{{ fiche.medecin.username }}</p>
                     <p *ngIf="!isCharge">fiche encore en attente</p>
                 </div>
             </div>
         </div>
         <div class="card-body">
             <button *ngIf="isPatient" type="button" (click)="deleteFiche(fiche.id)" class="btn btn-danger mx-1">Supprimer</button>
-            <button *ngIf="isDoctor" type="button" (click)="prendreCharge(fiche.id)" class="btn btn-dark mx-1">Prendre en charge</button>
+            <button *ngIf="isDoctor && !isCharge" type="button" (click)="prendreCharge()" class="btn btn-dark mx-1">Prendre en charge</button>
         </div>
     </div>
 </div>
