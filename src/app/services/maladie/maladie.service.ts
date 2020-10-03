@@ -20,6 +20,9 @@ export class MaladieService {
   get(id): Observable<Maladie> {
     return this.http.get<Maladie>(`${baseUrl}/${id}`).pipe(catchError(this.errorHandler));
   }
+  getMaladieByArraySymptomeId(arrayid): Observable<Maladie[]> {
+    return this.http.post<Maladie[]>(`${baseUrl}/byArray`,arrayid).pipe(catchError(this.errorHandler));
+  }
 
   create(data): Observable<Maladie> {
     return this.http.post<Maladie>(baseUrl, data).pipe(catchError(this.errorHandler));
@@ -42,19 +45,12 @@ export class MaladieService {
   }
 
   errorHandler(error) {
-
     let errorMessage = '';
-
     if(error.error instanceof ErrorEvent) {
-
       errorMessage = error.error.message;
-
     } else {
-
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-
     }
-
     return throwError(errorMessage);
 
  }

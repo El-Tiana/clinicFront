@@ -1,1 +1,43 @@
-<p>update-ordonnance works!</p>
+<div class="card shadow bg-light">
+    <div class="card-body">
+        <h1 class="card-title text-center">Diagnostic</h1>
+        <div>
+            <p><strong>Nom du client: </strong>{{ ordonnance.patient.username }}</p>
+            <p><strong>Nom du médecin responsable: </strong>{{ ordonnance.medecin.username }}</p>
+        </div>
+        <div class="col">
+            <strong>Symptomes:</strong>
+            <ul *ngFor="let symptome of ordonnance.symptomes">
+                <li>{{ symptome.description }}</li>
+            </ul>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <div class="form-group">
+                <label>La maladie correspondante</label>
+                <ng-select [items]="listemaladies" bindLabel="name" placeholder="Selectionnez la maladie qui correspond" appendTo="body" multiple="true" formControlName="maladie" [(ngModel)]="maladiesPossibles">
+                </ng-select>
+            </div>
+            <form [formGroup]="formMaladie" (ngSubmit)="submitMaladie()" class="">
+                <div class="form-inline align-items-center">
+                    <label class="col-form-label col-form-label-sm mx-2">Autre maladie:</label>
+                    <input class="form-control form-control-sm mb-2 mr-sm-2" formControlName="name" type="text">
+                    <button class="btn btn-primary mb-2 mr-sm-2" type="submit" [disabled]="!formMaladie.valid">Changer</button>
+                </div>
+            </form>
+            <div class="form-group">
+                <ng-select [items]="listemedicaments" bindLabel="name" placeholder="Selectionnez les remedes pour cette maladie" appendTo="body" multiple="true" formControlName="medicaments" [(ngModel)]="medicamentsPossibles">
+                </ng-select>
+            </div>
+            <form [formGroup]="formMedicament" (ngSubmit)="submitMedicament()">
+                <div class="form-inline align-items-center">
+                    <label class="col-form-label col-form-label-sm mx-2">Ajouter un médicament:</label>
+                    <input class="form-control form-control-sm mb-2 mr-sm-2" formControlName="name" type="text">
+                    <button class="btn btn-primary mb-2 mr-sm-2" type="submit" [disabled]="!formMedicament.valid">Ajouter</button>
+                </div>
+            </form>
+            <div class="text-center py-4 mt-3">
+                <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Valider diagnostic</button>
+            </div>
+        </form>
+    </div>
+</div>

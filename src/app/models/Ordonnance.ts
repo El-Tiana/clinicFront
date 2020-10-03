@@ -4,11 +4,12 @@ import { Symptome } from './Symptome';
 
 export class Ordonnance{
     id: number;
-    patient: {id:number,username:string};
+    patient: {id:number,username:string,email:string};
     medecin: {id:number,username:string,email: string};
     maladie: Maladie;
     medicaments: Medicament[];
     etat: number;
     symptomes: Symptome[];
     idFiche: number;
+    dateOrdonnance: Date;
 }

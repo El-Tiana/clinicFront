@@ -68,26 +68,27 @@ export class DetailsFicheComponent implements OnInit {
     this.userService.get(this.user.id).subscribe((data: User) => {
       this.fiche.medecin = data;
       this.fiche.etat = 1;
-      //this.newFiche = this.fiche;
-      console.log('this.fiche.id :'+this.fiche.id);
+      this.newFiche = this.fiche;
+      console.log('this.fiche.id :'+this.newFiche.id);
       this.ficheService.update(this.fiche.id, this.fiche).subscribe(res => {
         console.log('Fiche maintenant prise en charge');
         console.log(this.fiche);
-        return;
+        this.reloadPage();
       })
     });
-    this.reloadPage();
   }
   reloadPage(): void {
     window.location.reload();
   }
   faireDiagnostique(fiche: Fiche){
-    var ordonnance : Ordonnance;
+    var ordonnance : Ordonnance = new Ordonnance();
     ordonnance.symptomes = fiche.symptomes;
-    ordonnance.patient = fiche.patient;
-    ordonnance.medecin = fiche.medecin;
+    console.log(ordonnance.patient);
+    ordonnance.patient = {id:fiche.patient.id, username:fiche.patient.username, email:fiche.patient.email}
+    ordonnance.medecin = {id:fiche.medecin.id, username:fiche.medecin.username, email:fiche.medecin.email}
     ordonnance.etat = 0;
     ordonnance.idFiche = this.fiche.id;
+    console.log(ordonnance);
     this.ordonnanceService.create(ordonnance).subscribe((data: Ordonnance) => {
       console.log('Ordonnance créee avec succes!');
       ordonnance.id = data.id;
