@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/auth/token-storage.service';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user/user.service';
+import { Ordonnance } from 'src/app/models/Ordonnance';
+import { OrdonnanceService } from 'src/app/services/ordonnance/ordonnance.service';
 
 @Component({
   selector: 'app-details-fiche',
@@ -28,7 +30,8 @@ export class DetailsFicheComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tokenStorageService: TokenStorageService,
-    private userService: UserService
+    private userService: UserService,
+    private ordonnanceService: OrdonnanceService
   ) { }
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -70,11 +73,25 @@ export class DetailsFicheComponent implements OnInit {
       this.ficheService.update(this.fiche.id, this.fiche).subscribe(res => {
         console.log('Fiche maintenant prise en charge');
         console.log(this.fiche);
+        return;
       })
     });
     this.reloadPage();
   }
   reloadPage(): void {
     window.location.reload();
+  }
+  faireDiagnostique(fiche: Fiche){
+    var ordonnance : Ordonnance;
+    ordonnance.symptomes = fiche.symptomes;
+    ordonnance.patient = fiche.patient;
+    ordonnance.medecin = fiche.medecin;
+    ordonnance.etat = 0;
+    ordonnance.idFiche = this.fiche.id;
+    this.ordonnanceService.create(ordonnance).subscribe((data: Ordonnance) => {
+      console.log('Ordonnance créee avec succes!');
+      ordonnance.id = data.id;
+      this.router.navigateByUrl('ordonnances/updateOrdonnance/'+ordonnance.id);
+    })
   }
 }

@@ -32,6 +32,9 @@ import { AddFicheComponent } from './components/fiche/add-fiche/add-fiche.compon
 import { ListFicheUserComponent } from './components/fiche/list-fiche-user/list-fiche-user.component';
 import { DetailsFicheComponent } from './components/fiche/details-fiche/details-fiche.component';
 import { UpdateFicheComponent } from './components/fiche/update-fiche/update-fiche.component';
+import { OrdonnanceDetailsComponent } from './components/ordonnance/ordonnance-details/ordonnance-details.component';
+import { UpdateOrdonnanceComponent } from './components/ordonnance/update-ordonnance/update-ordonnance.component';
+import { ListOrdonnanceComponent } from './components/ordonnance/list-ordonnance/list-ordonnance.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,10 @@ import { UpdateFicheComponent } from './components/fiche/update-fiche/update-fic
     AddFicheComponent,
     ListFicheUserComponent,
     DetailsFicheComponent,
-    UpdateFicheComponent
+    UpdateFicheComponent,
+    OrdonnanceDetailsComponent,
+    UpdateOrdonnanceComponent,
+    ListOrdonnanceComponent
   ],
   imports: [
     BrowserModule,

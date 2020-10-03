@@ -88,16 +88,4 @@ export class AddFicheComponent implements OnInit {
       console.log(this.listesymptomes);
     });
   }
-  showAll(type: number){
-
-  }
-  showAttente(type: number){
-
-  }
-  showGere(type: number){
-
-  }
-  showFini(type: number){
-
-  }
 }

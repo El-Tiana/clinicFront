@@ -1,1 +1,32 @@
-<p>update-fiche works!</p>
+<div class="card shadow bg-light">
+    <div *ngIf="isPatient && isModifiable" class="card-body">
+        <h1 class="card-title text-center">Modifier fiche maladie</h1>
+        <form [formGroup]="form" (ngSubmit)="submitForm()">
+            <div class="form-group">
+                <label>Veuillez nous dire quels sont vos symptomes</label>
+                <ng-select [items]="listesymptomes" bindLabel="description" placeholder="Selectionnez les symptomes" appendTo="body" multiple="true" formControlName="symptomes" [(ngModel)]="fiche.symptomes">
+                </ng-select>
+            </div>
+            <form [formGroup]="formSymptome" (ngSubmit)="submitSymptome()" class="">
+                <div class="form-inline align-items-center">
+                    <label class="col-form-label col-form-label-sm mx-2">Autre symptome:</label>
+                    <input class="form-control form-control-sm mb-2 mr-sm-2" formControlName="description" type="text">
+                    <button class="btn btn-primary mb-2 mr-sm-2" type="submit" [disabled]="!formSymptome.valid">Ajouter symptome</button>
+                </div>
+            </form>
+            <div class="text-center py-4 mt-3">
+                <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Valider</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="!isPatient" class="card-body">
+        <h1 class="card-title text-center">
+            Vous n'êtes pas autorisé à accéder à cette page
+        </h1>
+    </div>
+    <div *ngIf="!isModifiable" class="card-body">
+        <h1 class="card-title text-center">
+            Vous ne pouvez plus modifier cette fiche
+        </h1>
+    </div>
+</div>

@@ -23,6 +23,9 @@ import { AddFicheComponent } from './components/fiche/add-fiche/add-fiche.compon
 import { ListFicheUserComponent } from './components/fiche/list-fiche-user/list-fiche-user.component';
 import { DetailsFicheComponent } from './components/fiche/details-fiche/details-fiche.component';
 import { UpdateFicheComponent } from './components/fiche/update-fiche/update-fiche.component';
+import { ListOrdonnanceComponent } from './components/ordonnance/list-ordonnance/list-ordonnance.component';
+import { UpdateOrdonnanceComponent } from './components/ordonnance/update-ordonnance/update-ordonnance.component';
+import { OrdonnanceDetailsComponent } from './components/ordonnance/ordonnance-details/ordonnance-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -49,6 +52,9 @@ const routes: Routes = [
   { path: 'fiches/addfiche', component: AddFicheComponent },
   { path: 'fiches/updatefiche/:id', component: UpdateFicheComponent },
   { path: 'fiches/:id', component: DetailsFicheComponent },
+  { path: 'ordonnances', component: ListOrdonnanceComponent },
+  { path: 'ordonnances/updateOrdonnance/:id', component: UpdateOrdonnanceComponent },
+  { path: 'ordonnances/:id', component: OrdonnanceDetailsComponent },
 ];
 
 @NgModule({
