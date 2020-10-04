@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/auth/token-storage.service';
 import { UserService } from 'src/app/services/auth/user.service';
 import { OrdonnanceService } from 'src/app/services/ordonnance/ordonnance.service';
+import * as JsonToXML from "js2xmlparser";
+import * as fileSaver from 'file-saver';
 
 @Component({
   selector: 'app-ordonnance-details',
@@ -50,6 +52,29 @@ export class OrdonnanceDetailsComponent implements OnInit {
     });
   }
   exportXML(){
-    
+    //console.log(JsonToXML.parse("ordonnance",this.ordonnance));
+    console.log("clic");
+    this.ordonnanceService.exportXml(this.id).subscribe(response => {
+      //const filename = response.headers.get('filename');
+        //this.saveFile(response.body, filename);
+        const blob1 = new Blob([response], { type: 'text/xml' });
+          fileSaver.saveAs(blob1, 'data.xml');
+        console.log(response);
+    });;
+    //this.saveFile(JsonToXML.parse("ordonnance",this.ordonnance));
+  }
+  download() {
+    this.ordonnanceService.downloadFile(this.id).subscribe(response => {
+			let blob:any = new Blob([response], { type: 'text/xml; charset=utf-8' });
+			const url = window.URL.createObjectURL(blob);
+			//window.open(url);
+			//window.location.href = response.url;
+			fileSaver.saveAs(blob, 'ordonnance.xml');
+		}), error => console.log('Error downloading the file'),
+                 () => console.info('File downloaded successfully');
+  }
+  saveFile(data: any, filename?: string) {
+    const blob = new Blob([data], {type: 'text/xml'});
+    fileSaver.saveAs(blob, filename);
   }
 }

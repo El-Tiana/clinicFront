@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GlobalConstants } from 'src/app/common/global-constants';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Ordonnance } from 'src/app/models/Ordonnance';
 import { catchError } from 'rxjs/operators';
@@ -24,6 +24,12 @@ export class OrdonnanceService {
   }
   getByMedecinIdAndEtat(params): Observable<Ordonnance[]> {
     return this.http.post<Ordonnance[]>(`${baseUrl}/medecin`,params).pipe(catchError(this.errorHandler));
+  }
+  exportXml(id) :Observable<any>{
+    return this.http.post<Blob>(`${baseUrl}/export`,id).pipe(catchError(this.errorHandler));
+  }
+  downloadFile(id): any {
+		return this.http.post(`${baseUrl}/export`, id,{responseType: 'blob'}).pipe(catchError(this.errorHandler));;
   }
 
   create(data): Observable<Ordonnance> {
