@@ -9,17 +9,11 @@
         <div class="card-body">
             <div class="col p-1 m-1"><strong>Ordonnance du {{ordonnance.dateFiche|date: 'dd/MM/yyyy HH:mm'}}</strong></div>
             <div class="details-fiche border col m-2 p-2">
-                <div class="col">
+                <div class="col inline">
                     <strong>Nom du patient:</strong>
                     <a href="#" [routerLink]="['/profile/', ordonnance.patient.id]">
                         <p>{{ ordonnance.patient.username }}</p>
                     </a>
-                </div>
-                <div class="col">
-                    <strong>Symptomes:</strong>
-                    <ul *ngFor="let symptome of ordonnance.symptomes">
-                        <li>{{ symptome.description }}</li>
-                    </ul>
                 </div>
                 <div class="col">
                     <strong>Médecin en charge:</strong>
@@ -28,9 +22,15 @@
                     </a>
                 </div>
                 <div class="col">
+                    <strong>Symptomes:</strong>
+                    <ul *ngFor="let symptome of ordonnance.symptomes" class="list-group">
+                        <li class="list-group-item">{{ symptome.description }}</li>
+                    </ul>
+                </div>
+                <div class="col">
                     <strong>Maladie(s)</strong>
-                    <ul *ngFor="let aretina of ordonnance.maladie">
-                        <li>{{ aretina.name }}</li>
+                    <ul *ngFor="let aretina of ordonnance.maladie" class="list-group">
+                        <li class="list-group-item">{{ aretina.name }}</li>
                     </ul>
                 </div>
                 <div class="col">

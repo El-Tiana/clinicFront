@@ -1,27 +1,30 @@
 <div class="container">
-    <div class="row">
-        <div class="col m-2">
-            <h1>Details maladie</h1>
-            <a href="#" routerLink="/maladies" class="btn btn-primary">Retour</a>
+    <div class="card bg-light mt-5">
+        <div class="card-title">
+            <div class="col m-2 text-center">
+                <h1>Details maladie</h1>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="details-maladie border col m-2 p-2">
-            <div class="col">
-                <strong>Nom:</strong>
-                <p>{{ maladie.name }}</p>
+        <div class="card-body">
+            <div class="details-maladie border col m-2 p-2">
+                <div class="col text-center">
+                    <h3>{{ maladie.name }}</h3>
+                </div>
+                <div class="col">
+                    <strong>Symptomes:</strong>
+                    <ul *ngFor="let symptome of maladie.symptomes" class="list-group">
+                        <li class="list-group-item">{{ symptome.description }}</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <strong>Medicaments:</strong>
+                    <ul *ngFor="let medicament of maladie.cures" class="list-group">
+                        <li class="list-group-item">{{ medicament.name }}</li>
+                    </ul>
+                </div>
             </div>
-            <div class="col">
-                <strong>Symptomes:</strong>
-                <ul *ngFor="let symptome of maladie.symptomes">
-                    <li>{{ symptome.description }}</li>
-                </ul>
-            </div>
-            <div class="col">
-                <strong>Medicaments:</strong>
-                <ul *ngFor="let medicament of maladie.cures">
-                    <li>{{ medicament.name }}</li>
-                </ul>
+            <div class="p-2 mt-3">
+                <a href="#" routerLink="/maladies" class="btn btn-primary">Retour</a>
             </div>
         </div>
     </div>

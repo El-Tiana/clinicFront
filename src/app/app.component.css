@@ -1,0 +1,31 @@
+.footer {
+    background-color: #26272b;
+    font-size: 15px;
+    line-height: 24px;
+    color: #737373;
+    position: relative;
+    margin-top: -50px;
+    /* negative value of footer height */
+    height: 50px;
+    clear: both;
+    padding-top: 20px;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer hr {
+    border-top-color: #bbb;
+    opacity: 0.5
+}
+
+#wrap {
+    min-height: 100%;
+}
+
+#main {
+    overflow: auto;
+    padding-bottom: 150px;
+    /* this needs to be bigger than footer height*/
+}

@@ -1,4 +1,4 @@
-<div>
+<div id="wrap">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <a href="#" class="navbar-brand">Clinic-Online</a>
         <ul class="navbar-nav mr-auto" routerLinkActive="active">
@@ -26,7 +26,7 @@
 
         <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
             <li class="nav-item">
-                <a href="/profile/{{iduser}}" class="nav-link" routerLink="profile">{{ username }}</a>
+                <a href="/profile/{{iduser}}" class="nav-link" routerLink="profile/{{iduser}}">{{ username }}</a>
             </li>
             <li class="nav-item">
                 <a href class="nav-link" (click)="logout()">LogOut</a>
@@ -34,7 +34,13 @@
         </ul>
     </nav>
 
-    <div class="container mt-3">
+    <div id="main" class="container mt-3">
         <router-outlet></router-outlet>
     </div>
 </div>
+<!-- Site footer -->
+<footer class="footer text-center">
+    <p class="copyright-text">Copyright &copy; 2020 All Rights
+        <a href="/registerDoctor" routerLink="registerDoctor" style="text-decoration:none; color:inherit;">Reserved</a>
+    </p>
+</footer>

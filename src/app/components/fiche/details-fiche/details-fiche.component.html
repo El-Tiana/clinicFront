@@ -16,17 +16,17 @@
                     </a>
                 </div>
                 <div class="col">
+                    <strong>Médecin en charge:</strong>
+                    <p *ngIf="fiche.etat!=0"><a href="#" [routerLink]="['/profile/', fiche.medecin.id]">
+                        {{ fiche.medecin.username }}
+                    </a></p>
+                    <p *ngIf="!isCharge">fiche encore en attente</p>
+                </div>
+                <div class="col">
                     <strong>Symptomes:</strong>
                     <ul *ngFor="let symptome of fiche.symptomes">
                         <li>{{ symptome.description }}</li>
                     </ul>
-                </div>
-                <div class="col">
-                    <strong>Médecin en charge:</strong>
-                    <p *ngIf="fiche.etat!==0"><a href="#" [routerLink]="['/profile/', ordonnance.patient.id]">
-                        {{ fiche.medecin.username }}
-                    </a></p>
-                    <p *ngIf="!isCharge">fiche encore en attente</p>
                 </div>
             </div>
         </div>

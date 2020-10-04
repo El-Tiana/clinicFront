@@ -1,19 +1,17 @@
 <div class="container">
     <h1>Liste des maladies</h1>
-    <a href="#" routerLink="/maladies/addmaladie" class="btn btn-success">Ajouter une maladie</a>
+    <a href="#" routerLink="/maladies/addmaladie" class="btn btn-success m-2">Ajouter une maladie</a>
     <table class="table table-bordered">
         <tr>
-            <th>ID</th>
             <th>Nom</th>
-            <th width="220px">Action</th>
+            <th width="300px">Action</th>
         </tr>
         <tr *ngFor="let maladie of maladies">
-            <td>{{ maladie.id }}</td>
             <td>{{ maladie.name }}</td>
             <td>
-                <a href="#" [routerLink]="['/maladies/', maladie.id]" class="btn btn-info">Voir</a>
-                <a href="#" [routerLink]="['/maladies/updatemaladie', maladie.id]" class="btn btn-primary">Modifier</a>
-                <button type="button" (click)="deleteMaladie(maladie.id)" class="btn btn-danger">Supprimer</button>
+                <a href="#" [routerLink]="['/maladies/', maladie.id]" class="btn btn-info mx-1">Voir</a>
+                <a href="#" *ngIf="isDoctor" [routerLink]="['/maladies/updatemaladie', maladie.id]" class="btn btn-primary mx-1">Modifier</a>
+                <button *ngIf="isDoctor" type="button" (click)="deleteMaladie(maladie.id)" class="btn btn-danger mx-1">Supprimer</button>
             </td>
         </tr>
     </table>
