@@ -35,6 +35,9 @@
                     <button class="btn btn-primary mb-2 mr-sm-2" type="submit" [disabled]="!formMedicament.valid">Ajouter</button>
                 </div>
             </form>
+            <div class="form-group">
+                <textarea class="form-control" formControlName="remarques" [(ngModel)]="ordonnance.remarques" rows="4"></textarea>
+            </div>
             <div class="text-center py-4 mt-3">
                 <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Valider diagnostic</button>
             </div>

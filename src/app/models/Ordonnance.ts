@@ -11,5 +11,6 @@ export class Ordonnance{
     etat: number;
     symptomes: Symptome[];
     idFiche: number;
-    dateOrdonnance: Date;
+    dateFiche: Date;
+    remarques: string;
 }

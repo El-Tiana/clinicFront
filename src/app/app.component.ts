@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   isDoctor = false;
   isPatient = false;
   username: string;
+  iduser: number;
 
   constructor(private tokenStorageService: TokenStorageService) { }
 
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit{
       this.isDoctor = this.roles.includes('ROLE_DOCTOR');
 
       this.username = user.username;
+      this.iduser = user.id;
     }
   }
 

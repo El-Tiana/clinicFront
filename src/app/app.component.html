@@ -12,7 +12,7 @@
                 <a href="/fichesuser" class="nav-link" routerLink="fichesuser">Fiches</a>
             </li>
             <li class="nav-item" *ngIf="isLoggedIn">
-                <a href="/ordonnances" class="nav-link" routerLink="admin">Ordonnances</a>
+                <a href="/ordonnances" class="nav-link" routerLink="ordonnances">Ordonnances</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
@@ -26,7 +26,7 @@
 
         <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
             <li class="nav-item">
-                <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+                <a href="/profile/{{iduser}}" class="nav-link" routerLink="profile">{{ username }}</a>
             </li>
             <li class="nav-item">
                 <a href class="nav-link" (click)="logout()">LogOut</a>

@@ -42,6 +42,9 @@ export class FicheService {
   update(id, data): Observable<Fiche> {
     return this.http.put<Fiche>(`${baseUrl}/${id}`, data).pipe(catchError(this.errorHandler));
   }
+  resoudre(id, data): Observable<Fiche> {
+    return this.http.put<Fiche>(`${baseUrl}/resoudre/${id}`, data).pipe(catchError(this.errorHandler));
+  }
 
   delete(id): Observable<Fiche> {
     return this.http.delete<Fiche>(`${baseUrl}/${id}`).pipe(catchError(this.errorHandler));

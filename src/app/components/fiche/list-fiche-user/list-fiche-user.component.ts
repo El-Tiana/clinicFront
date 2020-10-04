@@ -20,7 +20,7 @@ export class ListFicheUserComponent implements OnInit {
   user: any;
   patient: string;
   listeetat = ["En attente","Pris en charge","Resolu"]
-  constructor(public ficheService:FicheService,private tokenStorageService: TokenStorageService,private router: Router,) { }
+  constructor(public ficheService:FicheService,private tokenStorageService: TokenStorageService,private router: Router) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();

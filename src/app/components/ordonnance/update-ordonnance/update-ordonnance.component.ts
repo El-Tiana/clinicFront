@@ -8,6 +8,7 @@ import { MaladieService } from 'src/app/services/maladie/maladie.service';
 import { TokenStorageService } from 'src/app/services/auth/token-storage.service';
 import { Medicament } from 'src/app/models/Medicament';
 import { MedicamentService } from 'src/app/services/medicament/medicament.service';
+import { FicheService } from 'src/app/services/fiche/fiche.service';
 
 @Component({
   selector: 'app-update-ordonnance',
@@ -36,7 +37,8 @@ export class UpdateOrdonnanceComponent implements OnInit {
     private symptomeService: MaladieService,
     private tokenStorageService: TokenStorageService,
     private route: ActivatedRoute,
-    private medicamentService: MedicamentService
+    private medicamentService: MedicamentService,
+    private ficheService: FicheService
   ) {
   }
 
@@ -61,7 +63,8 @@ export class UpdateOrdonnanceComponent implements OnInit {
     }
     this.form = new FormGroup({
       maladie: new FormControl('', [Validators.required]),
-      medicaments: new FormControl('', [Validators.required])
+      medicaments: new FormControl('', [Validators.required]),
+      remarques: new FormControl('')
     });
     this.formMaladie = new FormGroup({
       name: new FormControl('', [Validators.required])
@@ -92,7 +95,10 @@ export class UpdateOrdonnanceComponent implements OnInit {
     console.log(this.ordonnance);
     this.ordonnanceService.update(this.id,this.ordonnance).subscribe(res => {
       console.log('Ordonnance modifiee avec succes!');
-      this.router.navigateByUrl('ordonnances');
+      this.ficheService.resoudre(this.ordonnance.idFiche,2).subscribe(res => {
+        console.log('Fiche resolue avec succes!');
+        this.router.navigateByUrl('ordonnances');
+      })
     })
   }
   submitMaladie() {

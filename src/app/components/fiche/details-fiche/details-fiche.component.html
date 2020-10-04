@@ -7,10 +7,13 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="col p-1 m-1"><strong>Fiche du {{fiche.dateFiche}}</strong></div>
             <div class="details-fiche border col m-2 p-2">
                 <div class="col">
                     <strong>Nom du patient:</strong>
-                    <p>{{ fiche.patient.username }}</p>
+                    <a href="#" [routerLink]="['/profile/', fiche.patient.id]">
+                        <p>{{ fiche.patient.username }}</p>
+                    </a>
                 </div>
                 <div class="col">
                     <strong>Symptomes:</strong>
@@ -20,7 +23,9 @@
                 </div>
                 <div class="col">
                     <strong>Médecin en charge:</strong>
-                    <p *ngIf="fiche.etat!==0">{{ fiche.medecin.username }}</p>
+                    <p *ngIf="fiche.etat!==0"><a href="#" [routerLink]="['/profile/', ordonnance.patient.id]">
+                        {{ fiche.medecin.username }}
+                    </a></p>
                     <p *ngIf="!isCharge">fiche encore en attente</p>
                 </div>
             </div>

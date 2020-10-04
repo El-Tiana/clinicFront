@@ -19,6 +19,12 @@ export class OrdonnanceService {
   get(id): Observable<Ordonnance> {
     return this.http.get<Ordonnance>(`${baseUrl}/${id}`).pipe(catchError(this.errorHandler));
   }
+  getByPatientId(id): Observable<Ordonnance[]> {
+    return this.http.post<Ordonnance[]>(`${baseUrl}/patient`,id).pipe(catchError(this.errorHandler));
+  }
+  getByMedecinIdAndEtat(params): Observable<Ordonnance[]> {
+    return this.http.post<Ordonnance[]>(`${baseUrl}/medecin`,params).pipe(catchError(this.errorHandler));
+  }
 
   create(data): Observable<Ordonnance> {
     return this.http.post<Ordonnance>(baseUrl, data).pipe(catchError(this.errorHandler));

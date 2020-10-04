@@ -1,1 +1,27 @@
-<p>list-ordonnance works!</p>
+<div *ngIf="isLoggedIn" class="container">
+    <div class="col p-1 my-2">
+        <h1>Liste des ordonnances</h1>
+        <div *ngIf="isDoctor">
+            <button type="button" (click)="showAttente()" class="btn btn-light">Ordonnances non validées</button>
+            <button type="button" (click)="showResolu()" class="btn btn-light">Ordonnances validées</button>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <tr>
+            <th>Date</th>
+            <th>Etat</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let ordonnance of ordonnances">
+            <td>{{ ordonnance.dateFiche | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ listeetat[ordonnance.etat] }}</td>
+            <td>
+                <a *ngIf="ordonnance.etat==1" href="#" [routerLink]="['/ordonnances/', ordonnance.id]" class="btn btn-info mx-1">Voir</a>
+                <a *ngIf="ordonnance.etat==0" href="#" [routerLink]="['/ordonnances/updateOrdonnance', ordonnance.id]" class="btn btn-info mx-1">Examiner</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="!isLoggedIn">
+    <h1>Page non autorisée!</h1>
+</div>

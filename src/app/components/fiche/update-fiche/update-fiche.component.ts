@@ -63,13 +63,13 @@ export class UpdateFicheComponent implements OnInit {
   }
   fetchFiche(){
     this.fiche = this.form.value;
-    const temp = {
+    /*const temp = {
       id: this.user.id,
       email: this.user.email,
       username: this.user.username, 
       password: this.user.password
     }
-    this.fiche.patient = temp;
+    this.fiche.patient = temp;*/
   }
   submitForm() {
     this.fetchFiche();
