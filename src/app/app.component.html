@@ -15,6 +15,14 @@
                 <a href="/ordonnances" class="nav-link" routerLink="ordonnances">Ordonnances</a>
             </li>
         </ul>
+        <ul *ngIf="isDoctor" class="navbar-nav mr-auto" routerLinkActive="active">
+            <li class="nav-item">
+                <a href="/symptomes" class="nav-link" routerLink="symptomes">Symptomes</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="medicaments" class="nav-link">Medicaments</a>
+            </li>
+        </ul>
         <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
             <li class="nav-item">
                 <a href="/register" class="nav-link" routerLink="register">Inscription</a>

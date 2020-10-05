@@ -25,6 +25,7 @@
             </div>
             <div class="p-2 mt-3">
                 <a href="#" routerLink="/maladies" class="btn btn-primary">Retour</a>
+                <a href="#" *ngIf="isDoctor" [routerLink]="['/maladies/updatemaladie', maladie.id]" class="btn btn-primary mx-1">Modifier</a>
             </div>
         </div>
     </div>
