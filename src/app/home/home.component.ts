@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/auth/user.service';
+import { Directive, AfterViewInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -21,5 +22,14 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+}
+@Directive({ selector: '[mydirective]' })
+export class ChangeColorDirective implements OnDestroy, AfterViewInit {
+    ngAfterViewInit() {
+        document.querySelector('body').classList.add('blue');
 
+    }
+    ngOnDestroy(): void {
+        document.querySelector('body').classList.remove('blue');
+    }
 }

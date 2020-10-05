@@ -24,7 +24,7 @@ import { LoginComponent } from './components/login/login.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent,ChangeColorDirective } from './home/home.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { RegisterDoctorComponent } from './components/register-doctor/register-doctor.component';
@@ -39,6 +39,7 @@ import { ListOrdonnanceComponent } from './components/ordonnance/list-ordonnance
 @NgModule({
   declarations: [
     AppComponent,
+    ChangeColorDirective,
     AddSymptomeComponent,
     ListSymptomeComponent,
     DetailsSymptomeComponent,

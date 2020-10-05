@@ -28,4 +28,5 @@
     overflow: auto;
     padding-bottom: 150px;
     /* this needs to be bigger than footer height*/
+    height: 100%;
 }
