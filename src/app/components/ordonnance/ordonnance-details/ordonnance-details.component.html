@@ -35,8 +35,8 @@
                 </div>
                 <div class="col">
                     <strong>Medicament(s) à prendre</strong>
-                    <ul *ngFor="let medicament of ordonnance.medicaments">
-                        <li>{{ medicament.name }}</li>
+                    <ul *ngFor="let medicament of ordonnance.medicaments" class="list-group">
+                        <li class="list-group-item">{{ medicament.name }}</li>
                     </ul>
                 </div>
                 <div class="col">
