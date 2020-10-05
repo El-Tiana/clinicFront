@@ -31,6 +31,7 @@ export class UpdateOrdonnanceComponent implements OnInit {
   arrayIds:number[];
   maladiesPossibles:Maladie[]=[];
   medicamentsPossibles: Medicament[]= [];
+  trouveDiagno = false;
 
   constructor(private ordonnanceService: OrdonnanceService,
     private router: Router,
@@ -134,6 +135,7 @@ export class UpdateOrdonnanceComponent implements OnInit {
     this.symptomeService.getMaladieByArraySymptomeId(this.arrayIds).subscribe((data: Maladie[]) => {
       this.maladiesPossibles = data;
       console.log(this.maladiesPossibles);
+      if(this.maladiesPossibles.length) this.trouveDiagno = true;
       this.maladiesPossibles.forEach(element => {
         this.medicamentsPossibles = this.medicamentsPossibles.concat(element.cures);
       });

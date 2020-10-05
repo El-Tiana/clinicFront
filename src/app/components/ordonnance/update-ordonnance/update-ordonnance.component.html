@@ -13,6 +13,7 @@
         </div>
         <form [formGroup]="form" (ngSubmit)="submitForm()">
             <div class="form-group">
+                <p *ngIf="!trouveDiagno" class="text-danger">Aucune maladie correspondante n'a été trouvée, séléctionnez manuellement</p>
                 <label>La maladie correspondante</label>
                 <ng-select [items]="listemaladies" bindLabel="name" placeholder="Selectionnez la maladie qui correspond" appendTo="body" multiple="true" formControlName="maladie" [(ngModel)]="maladiesPossibles">
                 </ng-select>
