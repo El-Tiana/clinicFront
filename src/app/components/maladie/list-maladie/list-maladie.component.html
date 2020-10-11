@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Liste des maladies</h1>
-    <a href="#" routerLink="/maladies/addmaladie" class="btn btn-success m-2">Ajouter une maladie</a>
+    <a *ngIf="isDoctor" href="#" routerLink="/maladies/addmaladie" class="btn btn-success m-2">Ajouter une maladie</a>
     <table class="table table-bordered">
         <tr>
             <th>Nom</th>
