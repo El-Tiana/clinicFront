@@ -715,8 +715,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var src_app_services_symptome_symptome_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/symptome/symptome.service */ "FIwj");
 /* harmony import */ var src_app_services_medicament_medicament_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/medicament/medicament.service */ "CqAS");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ng-select/ng-select */ "ZOsW");
+/* harmony import */ var src_app_services_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/auth/token-storage.service */ "wumP");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ng-select/ng-select */ "ZOsW");
+
 
 
 
@@ -742,26 +744,41 @@ function AddMaladieComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.f.name.errors.required);
 } }
 class AddMaladieComponent {
-    constructor(maladieService, router, symptomeService, medicamentService) {
+    constructor(maladieService, router, symptomeService, medicamentService, tokenStorageService) {
         this.maladieService = maladieService;
         this.router = router;
         this.symptomeService = symptomeService;
         this.medicamentService = medicamentService;
+        this.tokenStorageService = tokenStorageService;
+        this.isDoctor = false;
+        this.isLoggedIn = false;
     }
     ngOnInit() {
-        this.getAllSymptomes();
-        this.getAllMedicaments();
-        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]),
-            symptomes: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]),
-            cures: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required])
-        });
-        this.formSymptome = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            description: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required])
-        });
-        this.formMedicament = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
-            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required])
-        });
+        this.isLoggedIn = !!this.tokenStorageService.getToken();
+        if (this.isLoggedIn) {
+            const user = this.tokenStorageService.getUser();
+            this.roles = user.roles;
+            this.isDoctor = this.roles.includes('ROLE_DOCTOR');
+            this.user = user;
+        }
+        if (this.isDoctor) {
+            this.getAllSymptomes();
+            this.getAllMedicaments();
+            this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+                name: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]),
+                symptomes: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]),
+                cures: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required])
+            });
+            this.formSymptome = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+                description: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required])
+            });
+            this.formMedicament = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+                name: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required])
+            });
+        }
+        else {
+            this.router.navigateByUrl('login');
+        }
     }
     get f() {
         return this.form.controls;
@@ -800,7 +817,7 @@ class AddMaladieComponent {
         });
     }
 }
-AddMaladieComponent.ɵfac = function AddMaladieComponent_Factory(t) { return new (t || AddMaladieComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_maladie_maladie_service__WEBPACK_IMPORTED_MODULE_2__["MaladieService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_symptome_symptome_service__WEBPACK_IMPORTED_MODULE_4__["SymptomeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_medicament_medicament_service__WEBPACK_IMPORTED_MODULE_5__["MedicamentService"])); };
+AddMaladieComponent.ɵfac = function AddMaladieComponent_Factory(t) { return new (t || AddMaladieComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_maladie_maladie_service__WEBPACK_IMPORTED_MODULE_2__["MaladieService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_symptome_symptome_service__WEBPACK_IMPORTED_MODULE_4__["SymptomeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_medicament_medicament_service__WEBPACK_IMPORTED_MODULE_5__["MedicamentService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_6__["TokenStorageService"])); };
 AddMaladieComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AddMaladieComponent, selectors: [["app-add-maladie"]], decls: 31, vars: 9, consts: [[1, "card", "shadow", "bg-light"], [1, "card-body"], [1, "card-title", "text-center"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["formControlName", "name", "type", "text", 1, "form-control"], ["class", "alert alert-danger", 4, "ngIf"], ["bindLabel", "description", "placeholder", "Selectionnez les symptomes", "appendTo", "body", "multiple", "true", "formControlName", "symptomes", 3, "items"], [1, "", 3, "formGroup", "ngSubmit"], [1, "form-inline", "align-items-center"], [1, "col-form-label", "col-form-label-sm", "mx-2"], ["formControlName", "description", "type", "text", 1, "form-control", "form-control-sm", "mb-2", "mr-sm-2"], ["type", "submit", 1, "btn", "btn-primary", "mb-2", "mr-sm-2", 3, "disabled"], ["bindLabel", "name", "placeholder", "Selectionnez les remedes pour cette maladie", "appendTo", "body", "multiple", "true", "formControlName", "cures", 3, "items"], ["formControlName", "name", "type", "text", 1, "form-control", "form-control-sm", "mb-2", "mr-sm-2"], [1, "text-center", "py-4", "mt-3"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], [1, "alert", "alert-danger"], [4, "ngIf"]], template: function AddMaladieComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
@@ -873,7 +890,7 @@ AddMaladieComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx.formMedicament.valid);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx.form.valid);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_common__WEBPACK_IMPORTED_MODULE_6__["NgIf"], _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_7__["NgSelectComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbWFsYWRpZS9hZGQtbWFsYWRpZS9hZGQtbWFsYWRpZS5jb21wb25lbnQuY3NzIn0= */"] });
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_common__WEBPACK_IMPORTED_MODULE_7__["NgIf"], _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_8__["NgSelectComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbWFsYWRpZS9hZGQtbWFsYWRpZS9hZGQtbWFsYWRpZS5jb21wb25lbnQuY3NzIn0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AddMaladieComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -881,7 +898,7 @@ AddMaladieComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
                 templateUrl: './add-maladie.component.html',
                 styleUrls: ['./add-maladie.component.css']
             }]
-    }], function () { return [{ type: src_app_services_maladie_maladie_service__WEBPACK_IMPORTED_MODULE_2__["MaladieService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }, { type: src_app_services_symptome_symptome_service__WEBPACK_IMPORTED_MODULE_4__["SymptomeService"] }, { type: src_app_services_medicament_medicament_service__WEBPACK_IMPORTED_MODULE_5__["MedicamentService"] }]; }, null); })();
+    }], function () { return [{ type: src_app_services_maladie_maladie_service__WEBPACK_IMPORTED_MODULE_2__["MaladieService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }, { type: src_app_services_symptome_symptome_service__WEBPACK_IMPORTED_MODULE_4__["SymptomeService"] }, { type: src_app_services_medicament_medicament_service__WEBPACK_IMPORTED_MODULE_5__["MedicamentService"] }, { type: src_app_services_auth_token_storage_service__WEBPACK_IMPORTED_MODULE_6__["TokenStorageService"] }]; }, null); })();
 
 
 /***/ }),
